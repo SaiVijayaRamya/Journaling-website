@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Little Scrapbook 🌷</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Indie+Flower&family=Patrick+Hand&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="journlingstyle.css">
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <h1>🌷 My Little Scrapbook</h1>
+      <p>Little memories, beautiful moments, and everything in between ♡</p>
+    </div>
+    <div class="header-buttons">
+      <button id="saveBtn">💾 Save</button>
+      <button id="downloadBtn">📷 Download PNG</button>
+      <button id="backupBtn">📦 Backup All</button>
+      <button id="restoreBtn">📂 Restore</button>
+      <input type="file" id="restoreFile" accept=".json,application/json" hidden>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="panel">
+      <h2>📅 Mood tracker</h2>
+      <div class="calendar-header">
+        <button id="prevMonth">❮</button>
+        <strong id="monthTitle"></strong>
+        <button id="nextMonth">❯</button>
+      </div>
+      <div class="weekdays">
+        <span>Sun</span><span>Mon</span><span>Tue</span>
+        <span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+      </div>
+      <div id="calendar" class="calendar"></div>
+
+      <h3>🎨 Color your day</h3>
+      <p class="hint">Pick a color for the selected calendar date.</p>
+      <div class="mood-row">
+        <button class="mood pink" data-mood="pink" title="Lovely"></button>
+        <button class="mood yellow" data-mood="yellow" title="Happy"></button>
+        <button class="mood green" data-mood="green" title="Peaceful"></button>
+        <button class="mood red" data-mood="red" title="Emotional"></button>
+        <button class="mood blue" data-mood="blue" title="Quiet"></button>
+        <button id="clearMood" title="Clear mood">✕</button>
+      </div>
+      <p class="hint">🌸 Lovely · ☀️ Happy · 🍃 Peaceful · ❤️ Emotional · 🦋 Quiet</p>
+
+      <!-- 🌷 TO-DO LIST DESIGNER -->
+          <div class="todo-designer">
+
+            <h3>🎀 Design Your To-Do List</h3>
+
+            <button id="addTodoBtn" type="button" class="wide">
+              ☑ Add To-Do List
+            </button>
+
+            <!-- Choose list design -->
+            <label for="todoStyle">🌈 List Design</label>
+            <select id="todoStyle">
+              <option value="rainbow">🌈 Pastel Rainbow</option>
+              <option value="dashed">🎀 Dashed Lines</option>
+              <option value="lined">📒 Notebook Lines</option>
+              <option value="boxes">🌸 Box List</option>
+              <option value="dotted">✨ Dotted Lines</option>
+              <option value="minimal">🤍 Minimal</option>
+              <option value="gradient">🦋 Pastel Gradient</option>
+              <option value="custom">🎨 Custom Color</option>
+            </select>
+
+            <!-- Completion style -->
+            <label for="todoCheckStyle">
+              ☑ Completed Task Style
+            </label>
+            <select id="todoCheckStyle">
+              <option value="strike">Strike Off</option>
+              <option value="tick">Tick Mark ✓</option>
+            </select>
+
+            <!-- Background color -->
+            <label for="todoColor">🎨 Background Color</label>
+            <input type="color"
+                  id="todoColor"
+                  value="#ffd6e7">
+
+            <!-- Transparency -->
+            <label for="todoOpacity">🫧 Transparency</label>
+            <input type="range"
+                  id="todoOpacity"
+                  min="0"
+                  max="100"
+                  value="100">
+
+            <span id="todoOpacityValue">100%</span>
+
+          </div>
+          <!-- END TO-DO LIST DESIGNER -->
+
+          
+        <!-- WATER INTAKE BUDDY -->
+        <div class="water-controls">
+          <h3>💧 Water Intake Buddy</h3>
+          <button id="addWaterBtn" type="button" class="wide">
+            💦 Add Water Buddy to Sheet
+          </button>
+
+        </div>
+
+
+      <h3>📖 Saved Journals</h3>
+      <div id="entryList" class="entry-list"></div>
+    </aside>
+
+    <section class="workspace">
+      <div class="workspace-title">
+        <div>
+          <h2>My Blank Scrapbook Page ♡</h2>
+          <p id="dateLabel"></p>
+        </div>
+        <a href="D:\journling2\golas\goalsindex.html" target="_blank"><button>My Goals and growth</button></a>
+        <button id="newPageBtn">＋ Clear Page</button>
+      </div>
+
+      <div class="toolbar">
+        <div class="mode-group">
+          <button class="mode active" data-mode="write">✏️ Write</button>
+          <button class="mode" data-mode="draw">🖌️ Draw</button>
+          <button class="mode" data-mode="erase">🧽 Erase Ink</button>
+          <button class="mode" data-mode="move">✋ Move</button>
+        </div>
+
+        <label>Paper
+          <select id="paperTheme">
+            <option value="cream">Vanilla Cream</option>
+            <option value="pink">Blush Pink</option>
+            <option value="yellow">Pastel Yellow</option>
+            <option value="green">Sage Green</option>
+            <option value="blue">Baby Blue</option>
+            <option value="red">Soft Rose</option>
+            <option value="lavender">Lavender</option>
+            <option value="lined">Lined Paper</option>
+            <option value="grid">Graph Paper</option>
+          </select>
+        </label>
+
+        <label>Font
+          <select id="fontSelect">
+            <option value="Caveat">Caveat</option>
+            <option value="Indie Flower">Indie Flower</option>
+            <option value="Patrick Hand">Patrick Hand</option>
+            <option value="Quicksand">Quicksand</option>
+          </select>
+        </label>
+
+        <label>Size
+          <input type="number" id="fontSize" min="12" max="90" value="30">
+        </label>
+
+        <label>Color
+          <input type="color" id="inkColor" value="#72536a">
+        </label>
+
+        <label>Pen
+          <input type="range" id="penSize" min="1" max="30" value="4">
+        </label>
+
+        <button id="addTextBtn">＋ Add Text</button>
+        
+          <div class="writing-controls">
+            <label for="writingFontSize">✏️ Font Size</label>
+            <input
+              type="number"
+              id="writingFontSize"
+              min="10"
+              max="100"
+              value="30"
+            >
+
+            <label for="writingFontColor">🎨 Font Color</label>
+            <input
+              type="color"
+              id="writingFontColor"
+              value="#654b59"
+            >
+          </div>
+
+        <button id="undoInkBtn">↶ Undo Ink</button>
+        <button id="deleteItemBtn">🗑 Delete Selected</button>
+      </div>
+
+      <p class="editor-tip" id="modeHint">
+        Write mode: click any empty place on the paper to type. Tip: Use Move mode to arrange text, stickers and photos.
+      </p>
+      <p class="editor-tip" id="modeHint">
+        Tip: Use Move mode to arrange text, stickers and photos.
+      </p>
+
+      <div class="sheet-scroller">
+        <div id="journalSheet" class="journal-sheet cream">
+          <canvas id="drawingCanvas" width="700" height="900"></canvas>
+          <div id="itemLayer"></div>
+          <div class="watermark">my little memories ♡</div>
+        </div>
+      </div>
+
+      
+    </section>
+
+    <aside class="panel decoration-panel">
+      <h2>🎀 Decoration Corner</h2>
+      <p class="hint">Decorate your blank paper however you like!</p>
+
+      <h3>🌸 Cute Stickers</h3>
+      <div class="sticker-grid">
+        <button data-sticker="🌷">🌷</button>
+        <button data-sticker="🌸">🌸</button>
+        <button data-sticker="🌼">🌼</button>
+        <button data-sticker="🌻">🌻</button>
+        <button data-sticker="🌿">🌿</button>
+        <button data-sticker="🦋">🦋</button>
+        <button data-sticker="🐻">🐻</button>
+        <button data-sticker="🐰">🐰</button>
+        <button data-sticker="🍓">🍓</button>
+        <button data-sticker="🍒">🍒</button>
+        <button data-sticker="🎀">🎀</button>
+        <button data-sticker="💌">💌</button>
+        <button data-sticker="💖">💖</button>
+        <button data-sticker="✨">✨</button>
+        <button data-sticker="🌙">🌙</button>
+        <button data-sticker="⭐">⭐</button>
+        <button data-sticker="☁️">☁️</button>
+        <button data-sticker="🌈">🌈</button>
+        <button data-sticker="🧸">🧸</button>
+        <button data-sticker="📷">📷</button>
+      </div>
+
+      <h3>🖼️ Photos and My Stickers</h3>
+      <button id="uploadPhotoBtn" class="wide">＋ Upload Photo</button>
+      <button id="uploadStickerBtn" class="wide">＋ Upload My Sticker</button>
+      <input type="file" id="imageFile" accept="image/*" hidden>
+
+      <label class="field-label" for="imageUrl">Or paste an image URL</label>
+      <input id="imageUrl" type="url" placeholder="https://example.com/sticker.png">
+      <button id="addUrlBtn" class="wide">Add Image URL</button>
+
+      <h3>✂️ Scrapbook Decorations</h3>
+      <button id="stickyNoteBtn" class="wide">📝 Sticky Note</button>
+      <label class="field-label">
+          Sticky Note Transparency
+          <input
+            type="range"
+            id="stickyTransparency"
+            min="0"
+            max="100"
+            value="0"
+            step="5"
+          >
+          <span id="transparencyValue">0%</span>
+      </label>
+      
+      <div class="sticky-color-section">
+        <label for="stickyGradientPicker">
+          🎨 Choose Sticky Note Color
+        </label>
+
+        <input
+          type="color"
+          id="stickyGradientPicker"
+          value="#fff0ae"
+        >
+
+        <span id="stickyColorValue">#fff0ae</span>
+      </div>
+      
+      
+          
+
+
+
+      <button id="heartBtn" class="wide">♡ Heart</button>
+      <button id="dividerBtn" class="wide">✦ Divider</button>
+      <button id="tapeBtn" class="wide">🎀 Washi Tape</button>
+
+      <h3>📐 Selected Item</h3>
+        <label class="field-label">
+          Text Direction
+          <select id="textDirection">
+            <option value="horizontal">↔ Horizontal</option>
+            <option value="vertical">↕ Vertical</option>
+          </select>
+      </label>
+
+      <label class="field-label">Width
+        <input type="range" id="itemWidth" min="40" max="500" value="180">
+      </label>
+      <label class="field-label">Rotation
+        <input type="range" id="itemRotation" min="-180" max="180" value="0">
+      </label>
+      <button id="frontBtn" class="wide">Bring to Front</button>
+      <button id="backBtn" class="wide">Send to Back</button>
+
+      <p class="hint">Transparent PNG stickers look especially pretty on scrapbook paper.</p>
+    </aside>
+  </main>
+
+  <footer>Made with love ♡ Your memories deserve a beautiful home.</footer>
+
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script src="journlingjs.js"></script>
+</body>
+</html>
