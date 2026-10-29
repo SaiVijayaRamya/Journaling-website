@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>My Goals & Growth 🌷</title>
+
+  <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+  <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Quicksand:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="goalsstyle.css">
+
+  <script src="goalsjs.js" defer></script>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">♡ A little progress every day ♡</p>
+        <h1>🌷 My Goals & Growth</h1>
+        <p class="subtitle">
+          Every little effort helps me bloom.
+        </p>
+      </div>
+
+      <a class="journal-link" href="D:\journling2\index.html">
+        📖 My Journal
+      </a>
+    </div>
+  </header>
+
+  <main class="page-container">
+
+    <section class="welcome-card">
+      <span class="welcome-decoration">🦋</span>
+
+      <h2>Grow at your own pace</h2>
+
+      <p>
+        Choose a goal, select a day on its calendar,
+        and record how much effort you gave.
+        Every colorful day tells your story.
+      </p>
+    </section>
+
+    <!-- DASHBOARD -->
+
+    <section class="dashboard" aria-label="Goal summary">
+
+      <div class="stat-card">
+        <span>🌱 Total Goals</span>
+        <strong id="totalGoals">0</strong>
+      </div>
+
+      <div class="stat-card">
+        <span>🌸 Strong Effort Goals</span>
+        <strong id="completedGoals">0</strong>
+      </div>
+
+      <div class="stat-card">
+        <span>✨ Today's Check-ins</span>
+        <strong id="todayCheckins">0</strong>
+      </div>
+
+    </section>
+
+    <!-- CREATE GOAL -->
+
+    <section class="form-section">
+
+      <div class="section-heading">
+        <h2>🌼 Plant a New Dream</h2>
+      </div>
+
+      <form id="goalForm" class="goal-form">
+
+        <div class="field">
+          <label for="goalName">My goal</label>
+
+          <input
+            id="goalName"
+            type="text"
+            maxlength="100"
+            placeholder="e.g. Learn Java"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="goalAction">
+            My daily action
+          </label>
+
+          <input
+            id="goalAction"
+            type="text"
+            maxlength="100"
+            placeholder="e.g. Practice for 1 hour"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="goalTarget">
+            Target date (optional)
+          </label>
+
+          <input
+            id="goalTarget"
+            type="date"
+          >
+        </div>
+
+        <button type="submit" class="add-goal-btn">
+          🌷 Add My Goal
+        </button>
+
+      </form>
+    </section>
+
+    <!-- COLOR LEGEND -->
+
+    <section class="legend-section">
+
+      <h2>🎨 My Effort Colors</h2>
+
+      <div class="color-legend">
+
+        <div class="legend-item">
+          <span class="legend-dot gray"></span>
+          <span>0% — Not started</span>
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-dot yellow"></span>
+          <span>1–24% — Beginning</span>
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-dot orange"></span>
+          <span>25–49% — Building</span>
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-dot blue"></span>
+          <span>50–74% — Consistent</span>
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-dot green"></span>
+          <span>75–100% — Strong effort</span>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- SAVED GOALS -->
+
+    <section class="my-goals-section">
+
+      <div class="section-heading goals-heading">
+
+        <h2>🦋 My Growing Dreams</h2>
+
+        <div class="backup-actions">
+          <button id="backupBtn"
+                  type="button"
+                  class="secondary-btn">
+            📦 Backup Goals
+          </button>
+
+          <button id="restoreBtn"
+                  type="button"
+                  class="secondary-btn">
+            📂 Restore
+          </button>
+
+          <input
+            type="file"
+            id="restoreFile"
+            accept=".json,application/json"
+            hidden
+          >
+        </div>
+
+      </div>
+
+      <div id="goalsList" class="goals-grid"></div>
+
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    Made with love, patience, and little steps. ♡
+  </footer>
+
+</body>
+</html>
