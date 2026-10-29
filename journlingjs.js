@@ -862,26 +862,40 @@ const waterItems = [...layer.querySelectorAll(
 }
 
 
+
 function save(showMessage = true) {
-  if (selected) selected.contentEditable = "false";
+  try {
+    data.entries[date] = {
+      theme: $("paperTheme").value,
+      items: serializeItems(),
+      strokes: structuredClone(strokes),
+      updated: new Date().toISOString()
+    };
 
-  data.entries[date] = {
-    theme: $("paperTheme").value,
-    items: serializeItems(),
-    strokes: strokes,
-    updated: new Date().toISOString()
-  };
+    const ok = store();
 
-  const ok = store();
+    if (ok) {
+      renderCalendar();
+      renderEntries();
 
-  if (ok) {
-    renderCalendar();
-    renderEntries();
-    if (showMessage) alert("Your memory is saved! ♡");
+      if (showMessage) {
+        alert("Your journal page has been saved! ♡");
+      }
+    }
+
+    return ok;
+
+  } catch (error) {
+    console.error("Journal save failed:", error);
+
+    if (showMessage) {
+      alert("Unable to save your journal. Check the browser console.");
+    }
+
+    return false;
   }
-
-  return ok;
 }
+
 
 function loadPage() {
   layer.replaceChildren();
