@@ -862,6 +862,16 @@ const waterItems = [...layer.querySelectorAll(
 }
 
 
+setInterval(() => {
+  const hasItems = layer.querySelector(".journal-item") !== null;
+  const hasInk = strokes.length > 0;
+
+  // Don't recreate an empty journal entry
+  if (hasItems || hasInk || data.entries[date]) {
+    save(false);
+  }
+}, 30000);
+
 
 function save(showMessage = true) {
   try {
