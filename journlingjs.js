@@ -768,62 +768,33 @@ $("deleteItemBtn").onclick = () => {
 // ===== SAVE AND LOAD =====
 
 
+
 function serializeItems() {
-  
-  
-const todoItems = [...layer.querySelectorAll(
-  ".journal-item.todo"
-)].map(el => ({
-  type: "todo",
-  x: parseFloat(el.style.left) || 0,
-  y: parseFloat(el.style.top) || 0,
-  width: parseFloat(el.style.width) || 260,
-  height: parseFloat(el.style.height) || 200,
-  z: Number(el.style.zIndex || 1),
 
-  rotation: Number(el.dataset.rotation || 0),
-
-  // Save completion style
-  todoStyle: el.dataset.todoStyle || "strike",
-
-  // Save visual design
-  design: el.dataset.design || "rainbow",
-  color: el.dataset.todoColor || "#ffd6e7",
-  opacity: Number(el.dataset.todoOpacity ?? 100),
-
-  title: el.querySelector(".todo-title")
-    ?.textContent || "",
-
-  tasks: [...el.querySelectorAll(".todo-row")].map(row => ({
-    text: row.querySelector(".todo-task-text")
-      ?.textContent || "",
-    checked: row.querySelector(".todo-checkbox")
-      ?.checked || false
-  }))
-}));
-
-
+  // Save normal journal items
   const regularItems = [...layer.querySelectorAll(
-    ".journal-item:not(.todo):not(.water)"
+    ".journal-item:not(.todo)"
   )].map(el => ({
     type: el.dataset.type,
-    backgroundColor: el.dataset.type === "note"
-  ? el.style.backgroundColor
-  : "",
 
     x: parseFloat(el.style.left) || 0,
     y: parseFloat(el.style.top) || 0,
-
     width: parseFloat(el.style.width) || 180,
     height: parseFloat(el.style.height) || el.offsetHeight,
 
-    opacity: parseFloat(el.style.opacity || "1"),
+    opacity: el.style.opacity === ""
+      ? 1
+      : Number(el.style.opacity),
 
     rotation: Number(el.dataset.rotation || 0),
     z: Number(el.style.zIndex || 1),
+
     textDirection: el.dataset.textDirection || "horizontal",
 
-    // Save only actual text, not resize handles
+    backgroundColor: el.dataset.type === "note"
+      ? el.style.backgroundColor
+      : "",
+
     text: el.dataset.type === "image"
       ? ""
       : [...el.childNodes]
@@ -834,7 +805,6 @@ const todoItems = [...layer.querySelectorAll(
           .map(node => node.textContent)
           .join(""),
 
-    // Save uploaded image
     src: el.dataset.type === "image"
       ? el.querySelector("img")?.src || ""
       : "",
@@ -843,23 +813,40 @@ const todoItems = [...layer.querySelectorAll(
     size: parseFloat(el.style.fontSize) || 30,
     color: el.style.color
   }));
-  return [...regularItems, ...todoItems, ...waterItems];
-  
-const waterItems = [...layer.querySelectorAll(
-  ".journal-item.water"
-)].map(el => ({
-  type: "water",
-  x: parseFloat(el.style.left) || 0,
-  y: parseFloat(el.style.top) || 0,
-  width: parseFloat(el.style.width) || 260,
-  height: parseFloat(el.style.height) || 390,
-  z: Number(el.style.zIndex || 1),
-  rotation: Number(el.dataset.rotation || 0),
-  goal: Number(el.dataset.goal || 2500),
-  drunk: Number(el.dataset.drunk || 0)
-}));
 
+  // Save to-do lists
+  const todoItems = [...layer.querySelectorAll(
+    ".journal-item.todo"
+  )].map(el => ({
+    type: "todo",
+
+    x: parseFloat(el.style.left) || 0,
+    y: parseFloat(el.style.top) || 0,
+    width: parseFloat(el.style.width) || 260,
+    height: parseFloat(el.style.height) || 200,
+
+    z: Number(el.style.zIndex || 1),
+
+    backgroundColor: el.style.backgroundColor || "#fff3cc",
+
+    opacity: el.style.opacity === ""
+      ? 1
+      : Number(el.style.opacity),
+
+    todoStyle: el.dataset.todoStyle || "strike",
+
+    title: el.querySelector(".todo-title")?.textContent || "",
+
+    tasks: [...el.querySelectorAll(".todo-row")].map(row => ({
+      text: row.querySelector(".todo-task-text")?.textContent || "",
+      checked: row.querySelector(".todo-checkbox")?.checked || false
+    }))
+  }));
+
+  // Combine all journal items
+  return [...regularItems, ...todoItems];
 }
+
 
 
 setInterval(() => {
