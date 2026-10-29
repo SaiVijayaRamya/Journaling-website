@@ -769,6 +769,7 @@ $("deleteItemBtn").onclick = () => {
 
 
 
+
 function serializeItems() {
 
   // Save normal journal items
@@ -846,6 +847,7 @@ function serializeItems() {
   // Combine all journal items
   return [...regularItems, ...todoItems];
 }
+
 
 
 
